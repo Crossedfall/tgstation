@@ -24,15 +24,13 @@ jobs:
       - name: Build TGUI
         run: bin/tgui --ci
         working-directory: ./tgui
-      - name: Commit Artifacts
+      - name: "Commit"
         run: |
           git config --local user.email "action@github.com"
-          git config --local user.name "TGUI"
+          git config --local user.name "GitHub Action"
           git pull origin master
-          git commit -m "Automatic TGUI Rebuild [ci skip]" -a || true
-      - name: Push Artifacts
+          git commit -m "Automatic changelog compile [ci skip]" -a || true
+      - name: "Push"
         uses: ad-m/github-push-action@master
-        env:
-          GITHUB_ACTOR: comfyorange
         with:
-          github_token: ${{ secrets.GITHUB_MASTER_KEY }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
